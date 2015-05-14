@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>JQuery 读取 json 格式数据并展示</title>
+<script type="text/javascript" src="scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#letter-e .button").click(function(){
+            $("p").slideToggle();
+            $.getJSON("test.json",function(data){
+                $("#dictionary").empty();
+                var vhtml="";
+                vhtml += "<br />系统加载的json数据如下：<br/>";
+                $.each(data,function(entryIndex,entry){
+                    vhtml += "<ul>";
+                    vhtml += '<li class="text">' + entry['text'] + '</li>';
+                    vhtml += '<li class="value">' + entry['value'] + '</li>';
+                    vhtml += "</ul>";
+                });
+                $('#dictionary').append(vhtml);
+            });   
+        });
+    }); 
+</script>
+</head>
+<body>
+    <div class="letters">
+        <div class="letter" id="letter-e">
+            <h3>JQuery 读取 json 格式数据并展示</h3>
+            <div class="button" style="color:#F00;">点击加载json数据</div>
+        </div>
+    </div>
+    <div id="dictionary">尚未加载数据！</div>
+    <p style="border: solid 1px;">
+        注意：此测试请勿使用chrome测试，因为它禁止getjson调用本地文件。(按钮触发后隐藏)
+    </p>
+</body>
+</html>
